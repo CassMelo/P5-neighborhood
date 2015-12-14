@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/entypo.css">
+    <link rel="stylesheet" type="text/css" href="style/menu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script src="js/lib/jQuery.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+
+    <title>Your Neighborhood</title>
+
+</head>
+
+<body>
+
+    <nav class="mobileMenu">
+        <a id="menu" class="entypo-menu"></a>
+    </nav>
+
+    <div id="locations" class="locations">
+        <h3> Locations </h3>
+        <input type="text" id="filterLoc" data-bind="value: filterLocStr" placeholder="Filter Location" autofocus>
+        <button id="filterLocation" class "filterLoc-btn" data-bind="click: filterLoc">Filter</button>
+
+        <ul data-bind="foreach: locations">
+            <div data-bind="if: visible">
+                <li class="location" data-bind="css: {selectedLoc: selected},click: $parent.selectLoc.bind($data,'1'), text: name"> </li>
+            </div>
+        </ul>
+    </div>
+
+    <main>
+        <div class="map" data-bind="map: map"></div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script type="text/javascript">
+        /*
+         * Open the drawer when the menu is clicked
+         */
+        var filter = document.querySelector('#filterLocation');
+        var map = document.querySelector('.map');
+        var menu = document.querySelector('#menu');
+        var drawer = document.querySelector('#locations');
+
+        menu.addEventListener('click', function(e) {
+            drawer.classList.add('open');
+            e.stopPropagation();
+        });
+        filter.addEventListener('click', function() {
+            drawer.classList.remove('open');
+        });
+        map.addEventListener('click', function() {
+            drawer.classList.remove('open');
+        });
+    </script>
+</body>
+
+</html>
+

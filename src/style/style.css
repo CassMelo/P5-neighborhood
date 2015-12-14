@@ -1,0 +1,77 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    -moz-flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    -o-flex-flow: row nowrap;
+    -flex-flow: row nowrap;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    height: 100%;
+}
+
+.locations {
+    width: 20%;
+    max-width: 250px;
+    background-color: #c2d6d6;
+}
+
+h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-family: arial;
+    color: #00264d;
+}
+
+.locations,
+.map {
+    border-style: solid;
+    border-color: #94b7b7;
+}
+
+.selectedLoc {
+    background-color: #527a7a;
+    color: white;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+    min-height: 500px;
+    min-width: 500px;
+    z-index: 0;
+}
+
+.location {
+    list-style-type: none;
+    font-size: 12px;
+    font-family: arial;
+    text-align: left;
+    min-height: 20px;
+    text-indent: 0;
+}
+
+ul {
+    padding-left: 0.5em;
+}
+
+li {
+    list-style-type: none;
+    font-size: 12px;
+    font-family: arial;
+    color: #00264d;
+    text-align: left;
+}
