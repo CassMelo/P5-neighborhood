@@ -25,9 +25,11 @@ I you want to see all locations again, just have blank on the search input and p
 
 ###Selecting a location
 You can select a location either clicking on the map marker or at the location name.
-When a location is selected, the map marker will bounce and a window with the location name and phone number will appear.
+When a location is selected, the location's name will be highlighted, the map marker will bounce and a
+window with the location name and phone number will appear by the marker.
 In case the phone number wasn't available at foursquare website, just the name will appear.
 If a location is selected before a search is going to be performed, the selection will disappear after the search is done.
+When
 
 
 ##Author
