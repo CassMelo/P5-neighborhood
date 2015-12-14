@@ -6,30 +6,30 @@ Version 1.0 12/14/2015
 This project is part of the Udacity FrontEnd Developer Course. In this project we had to work with API and Google Maps.
 
 ## Installing
-To install just copy all files under the directory dist and run the file index.html
+To install just copy all files under the directory src and run the file index.html
 
 ##How to run the application
 
 
-Once the webpage is open is going to show a map of an areaclose to my neighborhood and 20 locations I'm interested in.
+Once the webpage is open, it shows a map of an area close to my neighborhood and 20 locations I'm interested in.
 Also, it'll show a list of these locations on the left. If the screen is less than 850px the location list will be hidden and
 you need to press the hamburger icon (on the left top corner) to open the location list. The location list will disappear after
 a search or when you click anywhere in the map area.
 
 ###Searching a location
 If you would like to narrow the location list you can type a string on the input that says "Filter Location" an press the **Filter** button.
-The list will updated will all locations that contain the string typed. The map will show only the markers related to those locations.
+The list will be updated with all locations that contain the string typed. The map will show only the markers related to those locations.
 
 I you want to see all locations again, just have blank on the search input and press the **Filter** button.
 
 
 ###Selecting a location
-You can select a location either clicking on the map marker or at the location name.
+You can select a location either clicking on the map marker or at the location's name.
 When a location is selected, the location's name will be highlighted, the map marker will bounce and a
 window with the location name and phone number will appear by the marker.
 In case the phone number wasn't available at foursquare website, just the name will appear.
 If a location is selected before a search is going to be performed, the selection will disappear after the search is done.
-When
+
 
 
 ##Author
