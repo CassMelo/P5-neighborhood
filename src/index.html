@@ -11,7 +11,9 @@
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/lib/jQuery.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>-->
 
+    <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>-->
 
     <title>Your Neighborhood</title>
 
@@ -25,13 +27,13 @@
 
     <div id="locations" class="locations">
         <h3> Locations </h3>
-        <input type="text" id="filterLoc" data-bind="value: filterLocStr" placeholder="Filter Location" autofocus>
-        <button id="filterLocation" class "filterLoc-btn" data-bind="click: filterLoc">Filter</button>
+        <input type="text" id="filterLoc" data-bind="value: filterLocStr, valueUpdate: 'afterkeydown', event: { keyup: filterLoc }" placeholder="Filter Location" autofocus>
+        <!-- <button id="filterLocation" class "filterLoc-btn" data-bind="click:filterLoc">Filter</button> -->
 
-        <ul data-bind="foreach: locations">
-            <div data-bind="if: visible">
-                <li class="location" data-bind="css: {selectedLoc: selected},click: $parent.selectLoc.bind($data,'1'), text: name"> </li>
-            </div>
+        <ul data-bind="foreach: filtered">
+            <!-- <div data-bind="if: visible"> -->
+            <li class="location" data-bind="css: {selectedLoc: selected},click: $parent.selectLoc.bind($data,'1'), text: name"> </li>
+            <!-- </div> -->
         </ul>
     </div>
 
@@ -44,7 +46,7 @@
         /*
          * Open the drawer when the menu is clicked
          */
-        var filter = document.querySelector('#filterLocation');
+        // var filter = document.querySelector('#filterLocation');
         var map = document.querySelector('.map');
         var menu = document.querySelector('#menu');
         var drawer = document.querySelector('#locations');
@@ -53,9 +55,9 @@
             drawer.classList.add('open');
             e.stopPropagation();
         });
-        filter.addEventListener('click', function() {
-            drawer.classList.remove('open');
-        });
+        // filter.addEventListener('click', function() {
+        //     drawer.classList.remove('open');
+        // });
         map.addEventListener('click', function() {
             drawer.classList.remove('open');
         });

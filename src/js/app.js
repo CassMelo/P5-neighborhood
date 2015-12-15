@@ -2,14 +2,15 @@ var ViewModel = function(){
 
 	var self = this; // in this case, self is the View_Model
 	var mapObj;
-	self.filterLocStr = ko.observable();
+	self.filterLocStr = ko.observable('');
 	self.selectedLoc =  ko.observable('');
 
 
 	/* Initialize Neighborhood Information */
 	self.street = ko.observable('1000 S La Grange Road');
 	self.city = ko.observable('Orland Park');
-	self.locations = ko.observableArray();
+	self.locations = ko.observableArray([]);
+	self.filtered = ko.observableArray([]);
 	self.map = ko.observable({
 		lat: ko.observable(41.602631),
 		lng: ko.observable(-87.853004)
@@ -17,7 +18,6 @@ var ViewModel = function(){
 	self.address = ko.computed(function() {
 		return self.street() + ', ' + self.city();
 	},this);
-
 
 	/* Initialize Map from Google Maps*/
 	ko.bindingHandlers.map = {
@@ -83,7 +83,7 @@ var ViewModel = function(){
 															content: place.name
 															})),
 				 			infoWindowStr: ko.observable(place.name),
-				 			visible: ko.observable(true),
+				 			// visible: ko.observable(true),
 				 			selected: ko.observable(false)};
 		 			 		});
 
@@ -101,9 +101,40 @@ var ViewModel = function(){
 							};
 						})(marker));
 				}// for
+
+				self.filtered(self.locations());
 	    	} //if
 		}); // nearbySearch
 	}; // getLocations
+
+
+	this.filterLoc = ko.pureComputed({
+	    read: function() {
+	    	this.filtered(this.locations());
+	    	return true;
+	    },
+	    write: function(value) {
+	    	var search = value.filterLocStr().toLowerCase();
+	    	var filteredLocations = ko.utils.arrayFilter(value.locations(), function(loc) {
+	    		var pos = loc.name().toLowerCase().indexOf(search);
+
+	    		loc.selected(false);
+				value.infoWindow(loc,'close');
+				value.selectedLoc("");
+
+	    		if (pos === -1) {
+	    			loc.marker().setMap(null);
+	    		} else {
+	    			loc.marker().setMap(self.mapObj);
+	    		}
+	            return (pos !== -1);
+	        });
+	    	this.filtered(filteredLocations);
+
+	        return true;
+	    },
+	    owner: this
+	});
 
 	this.getAdditionalInfo = function(loc){
 
@@ -129,26 +160,6 @@ var ViewModel = function(){
 		        });
 
 	};// getAdditionalInfo
-
-
-	this.filterLoc = function(clickedBtn) {
-
-		// filter locations based on the searchStrinf typed by the user
-
-		for (var i = 0; i<self.locations().length; i++){
-			if (self.locations()[i].name().toUpperCase().search(self.filterLocStr().toUpperCase()) < 0){
-				self.locations()[i].visible(false);
-				self.locations()[i].marker().setMap(null);
-			} else{
-				self.locations()[i].visible(true);
-				self.locations()[i].marker().setMap(self.mapObj);
-			}// if
-			self.locations()[i].selected(false);
-			self.infoWindow(self.locations()[i],'close');
-		}// for
-		self.selectedLoc("");
-	}; // filterLoc
-
 
 	this.selectLoc = function(Origin,clickedItem){
 
