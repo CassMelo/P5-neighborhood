@@ -50,8 +50,6 @@ h3 {
 .map {
     height: 100%;
     width: 100%;
-    min-height: 500px;
-    min-width: 500px;
     z-index: 0;
 }
 

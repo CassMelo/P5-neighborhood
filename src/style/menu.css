@@ -19,6 +19,7 @@ main {
     z-index: 50000;
     background-color: white;
     border-radius: 2px;
+    display: block;
 }
 
 .mobileMenu:hover {
@@ -48,28 +49,30 @@ main {
 }
 
 .locations {
+    width: 80%;
     height: 100%;
+    opacity: 1;
     display: block;
     position: absolute;
     z-index: 50001;
-    transform: translate(0, 0);
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -o-transform: translate(0, 0);
+    transform: translate(-80%, 0);
+    -webkit-transform: translate(-100%, 0);
+    -moz-transform: translate(-100%, 0);
+    -ms-transform: translate(-100%, 0);
+    -o-transform: translate(-100%, 0);
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+
 }
 
 .locations.open {
-    width: 80%;
-    display: block;
     transform: translate(0, 0);
     -webkit-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
-    -webkit-transition: all 1s ease, transform 1s ease;
-    transition: all 1s ease, transform 1s ease;
-    opacity: 1;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
 }
 
   /* If there is enough space (> 850px), we keep the drawer open all the time. */
@@ -93,28 +96,5 @@ main {
 
     .mobileMenu {
         display: none;
-    };
-}
-
-@media (max-width: 850px) {
-
-    /* Open the drawer. */
-    .locations {
-        display: none;
-        position: absolute;
-        transform: translate(-100%, 0);
-        -webkit-transform: translate(-100%, 0);
-        -moz-transform: translate(-100%, 0);
-        -ms-transform: translate(-100%, 0);
-        -o-transform: translate(-100%, 0);
     }
-
-    .mobileMenu {
-        display: block;
-    }
-
-    .map {
-        width: 100%;
-        flex-grow: 1;
-    };
 }

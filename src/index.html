@@ -10,38 +10,37 @@
 
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/lib/jQuery.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-    <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>-->
 
-    <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>-->
+    <script src="js/app.js"></script>
+    <script async defer
+            type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap">
+    </script>
 
-    <title>Your Neighborhood</title>
+    <title>My Neighborhood</title>
 
 </head>
 
 <body>
 
     <nav class="mobileMenu">
-        <a id="menu" class="entypo-menu"></a>
+        <a id="menu" class="entypo-menu" data-bind="click: openMenu"></a>
     </nav>
 
-    <div id="locations" class="locations">
+    <div id="locations" class="locations" data-bind="css: {open: menuIsOpen}">
         <h3> Locations </h3>
         <input type="text" id="filterLoc" data-bind="value: filterLocStr, valueUpdate: 'afterkeydown', event: { keyup: filterLoc }" placeholder="Filter Location" autofocus>
-        <!-- <button id="filterLocation" class "filterLoc-btn" data-bind="click:filterLoc">Filter</button> -->
 
         <ul data-bind="foreach: filtered">
-            <!-- <div data-bind="if: visible"> -->
             <li class="location" data-bind="css: {selectedLoc: selected},click: $parent.selectLoc.bind($data,'1'), text: name"> </li>
             <!-- </div> -->
         </ul>
     </div>
 
     <main>
-        <div class="map" data-bind="map: map"></div>
+        <div class="map" data-bind="map: map, click: closeMenu"></div>
     </main>
 
-    <script src="js/app.js"></script>
     <script type="text/javascript">
         /*
          * Open the drawer when the menu is clicked
@@ -51,16 +50,6 @@
         var menu = document.querySelector('#menu');
         var drawer = document.querySelector('#locations');
 
-        menu.addEventListener('click', function(e) {
-            drawer.classList.add('open');
-            e.stopPropagation();
-        });
-        // filter.addEventListener('click', function() {
-        //     drawer.classList.remove('open');
-        // });
-        map.addEventListener('click', function() {
-            drawer.classList.remove('open');
-        });
     </script>
 </body>
 

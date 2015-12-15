@@ -5,6 +5,9 @@ var ViewModel = function(){
 	self.filterLocStr = ko.observable('');
 	self.selectedLoc =  ko.observable('');
 
+	this.menuIsOpen = ko.observable(false);
+
+
 
 	/* Initialize Neighborhood Information */
 	self.street = ko.observable('1000 S La Grange Road');
@@ -136,7 +139,15 @@ var ViewModel = function(){
 	    owner: this
 	});
 
-	this.getAdditionalInfo = function(loc){
+	this.openMenu = function() {
+    	self.menuIsOpen(true);
+	};
+
+	this.closeMenu = function() {
+	    self.menuIsOpen(false);
+	};
+
+		this.getAdditionalInfo = function(loc){
 
 			// get additional info to put on the infowindow.
 			var phoneStr = "";
@@ -155,8 +166,9 @@ var ViewModel = function(){
 
 				loc.infoWindowStr(loc.infoWindowStr() +  phoneStr);
 
-		    }) .fail(function( ) {
+		    }) .fail(function(err ) {
 		            console.log( "Request Failed: " + err );
+		            loc.infoWindowStr(loc.infoWindowStr() +  '<br/>foursquare info not available');
 		        });
 
 	};// getAdditionalInfo
@@ -230,6 +242,9 @@ var ViewModel = function(){
 			marker.setAnimation(null);
 		} else {
 		    marker.setAnimation(google.maps.Animation.BOUNCE);
+		//     window.setTimeout(function() {
+  //           	marker.setAnimation(null);
+  //       	}, 2100);
 		}
 	};// toggleBounce
 
@@ -245,6 +260,7 @@ var ViewModel = function(){
 
 }; // ViewModel
 
+function initMap() {
+    ko.applyBindings(new ViewModel());
+}
 
-
-ko.applyBindings(new ViewModel());
